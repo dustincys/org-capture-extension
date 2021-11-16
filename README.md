@@ -4,6 +4,7 @@ This is an extension for Google Chrome (tm) and Firefox (tm) which adds a "Captu
 
 # Improvements
 
+- Adding support for org-roam protocol
 - Adding options for selecting the exact structure of the links that are constructed (e.g. for the benefit of people with '///' problems).
 - There is always room to improve. Open a ticket with your ideas.
 
@@ -26,6 +27,8 @@ _Note_: The first time you use the extension, Chrome will ask you allow it to ru
 Detailed instructions available at [Org-Mode site].
 
 The gist of it is to make your system recognize emacsclient as the handler of ```org-protocol://``` links. In addition, one needs to set up emacs to load org-protocol and to set up capture templates.
+
+_Note_: Templates are `capture` and `org-roam`, first use `url` param and second use `ref` param.
 
 ### Register emacsclient as the ```org-protocol``` handler
 
