@@ -26,6 +26,7 @@ function save_options() {
     var selTemp = document.getElementById('selTemplate').value;
     var unselTemp = document.getElementById('unselTemplate').value;
     var NewStyleP = document.getElementById('useNewStyle').checked;
+    var roamP = document.getElementById('isRoam').checked;
     var debugP = document.getElementById('debug').checked;
     var overlayP = document.getElementById('overlay').checked;
 
@@ -33,6 +34,7 @@ function save_options() {
         selectedTemplate: selTemp,
         unselectedTemplate: unselTemp,
         useNewStyleLinks: NewStyleP,
+        isRoam: roamP,
         debug: debugP,
         overlay: overlayP
     }, function() {
@@ -53,12 +55,14 @@ function restore_options() {
         selectedTemplate: 'p',
         unselectedTemplate: 'L',
         useNewStyleLinks: true,
+        roam: false,
         debug: false,
         overlay: true
     }, function(options) {
         document.getElementById('unselTemplate').value = options.unselectedTemplate;
         document.getElementById('selTemplate').value = options.selectedTemplate;
         document.getElementById('useNewStyle').checked = options.useNewStyleLinks;
+        document.getElementById('isRoam').checked = options.isRoam;
         document.getElementById('debug').checked = options.debug;
         document.getElementById('overlay').checked = options.overlay;
     });
