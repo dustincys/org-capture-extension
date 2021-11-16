@@ -55,7 +55,7 @@ function restore_options() {
         selectedTemplate: 'p',
         unselectedTemplate: 'L',
         useNewStyleLinks: true,
-        roam: false,
+        isRoam: false,
         debug: false,
         overlay: true
     }, function(options) {
