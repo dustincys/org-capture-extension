@@ -26,21 +26,28 @@
 
   class Capture {
 
-   createCaptureURI() {
-     var protocol = "capture";
+   createCaptureURI() {、
+     // 判断协议。如果是roam，就使用roam-ref，否则使用capture
+     var protocol = (this.isRoam ? "roam-ref" : "capture");
      var template = (this.selection_text != "" ? this.selectedTemplate : this.unselectedTemplate);
      if (this.useNewStyleLinks)
-       return "org-protocol://"+protocol+"?template="+template+'&url='+this.encoded_url+'&title='+this.escaped_title+'&body='+this.selection_text;
+       // 如果使用roam，查询字段改为ref，否则为url
+       return (this.isRoam)?
+         "org-protocol://"+protocol+"?template="+template+'&ref='+this.encoded_url+'&title='+this.escaped_title+'&body='+this.selection_text
+         :"org-protocol://"+protocol+"?template="+template+'&url='+this.encoded_url+'&title='+this.escaped_title+'&body='+this.selection_text;
      else
-       return "org-protocol://"+protocol+":/"+template+'/'+this.encoded_url+'/'+this.escaped_title+'/'+this.selection_text;
+       return (this.isRoam)?
+         "org-protocol://"+protocol+":/"+template+'/'+this.encoded_url+'/'+this.escaped_title+'/'+this.selection_text
+         :"org-protocol://"+protocol+":/"+template+'/'+this.encoded_url+'/'+this.escaped_title+'/'+this.selection_text;
     }
+    
 
     constructor() {
       this.window = window;
       this.document = document;
       this.location = location;
-
-      this.selection_text = escapeIt(window.getSelection().toString());
+      // 选择文本预处理，如果是roam，调用专门的处理函数返回字符串。如果不是，将选择文本直接返回字符串。
+      this.selection_text = (this.isRoam? roamcontent() : escapeIt(window.getSelection().toString()));
       this.encoded_url = encodeURIComponent(location.href);
       this.escaped_title = escapeIt(document.title);
 
@@ -89,6 +96,30 @@
                                    "[)]", escape(")")),
                        "[']" ,escape("'"));
   }
+  
+   // 添加动态抓取的模板 
+   function roamcontent (){
+     var html = "";
+     var sel = window.getSelection();
+     if (sel.rangeCount) {
+       var container = document.createElement("div");
+       for (var i = 0, len = sel.rangeCount; i < len; ++i) {
+         container.appendChild(sel.getRangeAt(i).cloneContents());
+       }
+       html = container.innerHTML;
+     }
+     var dataDom = document.createElement("div");
+     dataDom.innerHTML = html;
+     ["p", "h1", "h2", "h3", "h4"].forEach(function(tag, idx){
+       dataDom.querySelectorAll(tag).forEach(function(item, index) {
+         var content = item.innerHTML.trim();
+         if (content.length > 0) {
+           item.innerHTML = content + "\n\p";
+         }
+       });
+     });
+     return dataDom.innerText.trim();
+   }
 
   function logURI(uri) {
     window.console.log("Capturing the following URI with new org-protocol: ", uri);
