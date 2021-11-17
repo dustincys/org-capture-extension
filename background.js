@@ -28,6 +28,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
         selectedTemplate: 'p',
         unselectedTemplate: 'L',
         useNewStyleLinks: true,
+        isRoam: false,
         debug: false,
         overlay: true
       });
@@ -37,6 +38,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
         selectedTemplate: 'p',
         unselectedTemplate: 'L',
         useNewStyleLinks: false,
+        isRoam: false,
         debug: false,
         overlay: true
       });

@@ -27,7 +27,6 @@
   class Capture {
 
    createCaptureURI() {
-     // 判断协议。如果是roam，就使用roam-ref，否则使用capture
      var protocol = (this.isRoam ? "roam-ref" : "capture");
      var template = (this.selection_text != "" ? this.selectedTemplate : this.unselectedTemplate);
      if (this.useNewStyleLinks)
@@ -46,7 +45,7 @@
       this.window = window;
       this.document = document;
       this.location = location;
-	// 选择文本预处理，如果是roam，调用专门的处理函数返回字符串。如果不是，将选择文本直接返回字符串。
+
       this.selection_text = (this.isRoam? roamcontent() : escapeIt(window.getSelection().toString()));
       this.encoded_url = encodeURIComponent(location.href);
       this.escaped_title = escapeIt(document.title);
@@ -54,7 +53,6 @@
     }
 
       capture() {
-     // 生成需要的返回数据
 	  var uri = this.createCaptureURI();
 	  console.log(uri);
 
@@ -83,7 +81,6 @@
         this.protocol = this.unselectedProtocol;
       }
 
-      //初始化参数，将用户输入的options键值对全部复制给capture类，包括isRoam等
       for(var k in options) this[k] = options[k];
       this.capture();
     }
@@ -100,7 +97,6 @@
                        "[']" ,escape("'"));
   }
   
-   // 添加动态抓取的模板 
    function roamcontent (){
      var html = "";
      var sel = window.getSelection();
