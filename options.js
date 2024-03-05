@@ -27,6 +27,7 @@ function save_options() {
     var unselTemp = document.getElementById('unselTemplate').value;
     var NewStyleP = document.getElementById('useNewStyle').checked;
     var roamP = document.getElementById('isRoam').checked;
+    var rawP = document.getElementById('isRaw').checked;
     var debugP = document.getElementById('debug').checked;
     var overlayP = document.getElementById('overlay').checked;
 
@@ -35,6 +36,7 @@ function save_options() {
         unselectedTemplate: unselTemp,
         useNewStyleLinks: NewStyleP,
         isRoam: roamP,
+        isRaw: rawP,
         debug: debugP,
         overlay: overlayP
     }, function() {
@@ -56,6 +58,7 @@ function restore_options() {
         unselectedTemplate: 'L',
         useNewStyleLinks: true,
         isRoam: false,
+        isRaw: false,
         debug: false,
         overlay: true
     }, function(options) {
@@ -63,6 +66,7 @@ function restore_options() {
         document.getElementById('selTemplate').value = options.selectedTemplate;
         document.getElementById('useNewStyle').checked = options.useNewStyleLinks;
         document.getElementById('isRoam').checked = options.isRoam;
+        document.getElementById('isRaw').checked = options.isRaw;
         document.getElementById('debug').checked = options.debug;
         document.getElementById('overlay').checked = options.overlay;
     });

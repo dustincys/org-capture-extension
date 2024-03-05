@@ -29,6 +29,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
         unselectedTemplate: 'L',
         useNewStyleLinks: true,
         isRoam: false,
+        isRaw: false,
         debug: false,
         overlay: true
       });
@@ -39,6 +40,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
         unselectedTemplate: 'L',
         useNewStyleLinks: false,
         isRoam: false,
+        isRaw: false,
         debug: false,
         overlay: true
       });

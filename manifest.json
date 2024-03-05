@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
-    "name": "Org Capture version2",
-    "version": "0.3.2",
+    "name": "Org and Org roam protocol webpage extractor",
+    "version": "0.0.1",
     "description": "A helper for capturing things via org-protocol in emacs: First, set up: http://orgmode.org/worg/org-contrib/org-protocol.html",
     "homepage_url": "https://github.com/dustincys/org-capture-extension",
 
@@ -31,7 +31,7 @@
     },
     "browser_specific_settings": {
         "gecko": {
-            "id": "yanshuoc@gmail.com"
+            "id": "org-roam-capture@yanshuo"
         }
     }
 }

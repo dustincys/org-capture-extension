@@ -59,7 +59,7 @@
             this.location = location;
 
             this.selection_text = (this.isRoam ? roamcontent() : escapeIt(window.getSelection().toString()));
-            this.whole_page = escapeIt(document.body.innerHTML);
+            this.whole_page = (this.isRaw ? escapeIt(document.body.innerHTML.trim()) : escapeIt(document.body.innerText.trim()));
             this.encoded_url = encodeURIComponent(location.href);
             this.escaped_title = escapeIt(document.title);
 
